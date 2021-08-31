@@ -1,0 +1,1 @@
+{"version":3,"file":"dbInterface.js","sourceRoot":"","sources":["../../src/controllers/dbInterface.ts"],"names":[],"mappings":";;;AAAO,MAAM,UAAU,GAAG,GAAiB,EAAE;IAC3C,OAAO,OAAO,CAAC,OAAO,EAAE,CAAC;AAC3B,CAAC,CAAA;AAFY,QAAA,UAAU,cAEtB;AAEM,MAAM,SAAS,GAAG,GAAiB,EAAE;IAC1C,OAAO,OAAO,CAAC,OAAO,EAAE,CAAC;AAC3B,CAAC,CAAA;AAFY,QAAA,SAAS,aAErB"}
