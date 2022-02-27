@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import connectDB from './config/db';
 
 // import cookieParser from 'cookie-parser';
 import { readConfig } from './config';
@@ -21,9 +20,7 @@ class App {
 
   constructor() {
 
-    readConfig('/Users/tedshaffer/Documents/Projects/tedClientServerBoilerplate/tedServerBoilerplate/src/config/config.env');
-
-    connectDB();
+    readConfig('/Users/tedshaffer/Documents/Projects/tedServerBoilerplate/src/config/config.env');
 
     this.app = express();
     this.config();

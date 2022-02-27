@@ -12,7 +12,6 @@ export const readConfig = (pathToConfigFile: string): void => {
 
     if (!isNil(parsedConfig)) {
       tedClientServerBoilerplateConfiguration = {
-        MONGO_URI: parsedConfig.MONGO_URI,
         PORT: Number(parsedConfig.PORT),
       };
       console.log(tedClientServerBoilerplateConfiguration);

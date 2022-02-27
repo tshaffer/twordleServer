@@ -1,3 +1,3 @@
-export * from './dbInterface';
+export * from './app';
 export * from './mainController';
 export * from './testEndpoints';
