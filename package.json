@@ -1,7 +1,7 @@
 {
-  "name": "tedserverboilerplate",
-  "version": "0.0.2",
-  "description": "boilerplate for server - no db",
+  "name": "twordle",
+  "version": "0.0.1",
+  "description": "server for twordle",
   "main": "dist/server.js",
   "engines": {
     "node": "16.x"
