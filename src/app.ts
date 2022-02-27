@@ -20,7 +20,7 @@ class App {
 
   constructor() {
 
-    readConfig('/Users/tedshaffer/Documents/Projects/tedServerBoilerplate/src/config/config.env');
+    readConfig('/Users/tedshaffer/Documents/Projects/twordleServer/src/config/config.env');
 
     this.app = express();
     this.config();

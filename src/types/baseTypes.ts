@@ -1,3 +1,3 @@
-export interface TedClientServerBoilerplateConfiguration {
+export interface TwordleConfiguration {
   PORT: number;
 }

@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv';
 import { isNil } from 'lodash';
-import { TedClientServerBoilerplateConfiguration } from '../types';
+import { TwordleConfiguration } from '../types';
 
-export let tedClientServerBoilerplateConfiguration: TedClientServerBoilerplateConfiguration; 
+export let twordleConfiguration: TwordleConfiguration; 
 
 export const readConfig = (pathToConfigFile: string): void => {
 
@@ -11,10 +11,10 @@ export const readConfig = (pathToConfigFile: string): void => {
     const parsedConfig: dotenv.DotenvParseOutput | undefined = configOutput.parsed;
 
     if (!isNil(parsedConfig)) {
-      tedClientServerBoilerplateConfiguration = {
+      twordleConfiguration = {
         PORT: Number(parsedConfig.PORT),
       };
-      console.log(tedClientServerBoilerplateConfiguration);
+      console.log(twordleConfiguration);
     }
   }
   catch (err) {
