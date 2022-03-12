@@ -9,3 +9,11 @@ export const getVersion = (request: Request, response: Response, next: any) => {
   };
   response.json(data);
 };
+
+export const getWords = (request: Request, response: Response, next: any) => {
+  console.log('getWords');
+  response.status(200).json({
+    success: true,
+    words: ['herro', 'pizza'],
+  });
+};

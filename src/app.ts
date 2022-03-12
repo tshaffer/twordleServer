@@ -15,6 +15,8 @@ import { Routes } from './routes/routes';
 import {
   getTest,
   postTest,
+  getVersion,
+  getWords,
 } from './controllers';
 
 class App {
@@ -57,6 +59,11 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
     this.route.routes(this.app);
+
+    // app routes
+    this.app.get('/api/v1/version', getVersion);
+    
+    this.app.post('/api/v1/getWords', getWords);
 
     this.app.get('/api/v1/test', getTest);
     this.app.post('/api/v1/test', postTest);
