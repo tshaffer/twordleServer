@@ -1,12 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 
-const en = require('dictionary-en');
-
-import * as fs from 'fs';
-
 // import cookieParser from 'cookie-parser';
 import { readConfig } from './config';
+
+import { initializeSpellChecker } from './controllers';
 
 const bodyParser = require('body-parser');
 
@@ -28,28 +26,8 @@ class App {
 
     readConfig('/Users/tedshaffer/Documents/Projects/twordleServer/src/config/config.env');
 
-    // https://www.npmjs.com/package/hunspell-spellchecker
-    var Spellchecker = require("hunspell-spellchecker");
-    var spellchecker = new Spellchecker();
-
-
-    // Parse an hunspell dictionary that can be serialized as JSON
-    var DICT = spellchecker.parse({
-      aff: fs.readFileSync("/Users/tedshaffer/Documents/Projects/twordleServer/node_modules/dictionary-en/index.aff"),
-      dic: fs.readFileSync("/Users/tedshaffer/Documents/Projects/twordleServer/node_modules/dictionary-en/index.dic")
-    });
-
-    // Load a dictionary
-    spellchecker.use(DICT);
-
-    // Check a word
-    var isPizzaRight = spellchecker.check("pizza");
-    var isFlibbetRight = spellchecker.check("flibbet");
-
-    // en(function (err: any, result: any) {
-    //   console.log(err || result);
-    // });
-
+    initializeSpellChecker();
+    
     this.app = express();
     this.config();
 
