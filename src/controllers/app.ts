@@ -40,7 +40,7 @@ export const getWords = (request: Request, response: Response, next: any) => {
   console.log('getWords');
   console.log(request.body);
 
-  const { candidateLettersAtLocation, lettersNotAtExactLocation } = request.body;
+  const { candidateLettersAtLocation, lettersSomewhereInWord } = request.body;
 
   const words: string[] = [];
 
@@ -55,22 +55,23 @@ export const getWords = (request: Request, response: Response, next: any) => {
           for (let clalIndex4 = 0; clalIndex4 < candidateLettersAtLocation[4].length; clalIndex4++) {
             const clal4 = candidateLettersAtLocation[4][clalIndex4];
 
-            const candidateWord = clal0 + clal1 + clal2 + clal3 + clal4;
+            const candidateWord: string = clal0 + clal1 + clal2 + clal3 + clal4;
+
+            // console.log(candidateWord + candidateWord.length);
 
             // ensure that word contains all lettersNotAtExactLocation
-            let allLettersNotAtExactLocationAreInThisWord = true;
+            let allLettersSomewhereInWordAreInThisWord = true;
             const candidateWordAsArray = candidateWord.split('');
-            for (const letterNotAtExactLocation of lettersNotAtExactLocation) {
-              if (!isNil(letterNotAtExactLocation)) {
-                if (candidateWordAsArray.indexOf(letterNotAtExactLocation) < 0) {
-                  // console.log(letterNotAtExactLocation + ' is not anywhere in ' + candidateWord);
-                  allLettersNotAtExactLocationAreInThisWord = false;
+            for (const letterSomewhereInWord of lettersSomewhereInWord) {
+              if (!isNil(letterSomewhereInWord)) {
+                if (candidateWordAsArray.indexOf(letterSomewhereInWord) < 0) {
+                  allLettersSomewhereInWordAreInThisWord = false;
                   break;
                 }
               }
             }
 
-            if (allLettersNotAtExactLocationAreInThisWord) {
+            if (allLettersSomewhereInWordAreInThisWord) {
               const isWord = spellchecker.check(candidateWord);
               // console.log(candidateWord + ' ' + isWord);
               if (isWord) {
