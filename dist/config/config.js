@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.readConfig = exports.tedClientServerBoilerplateConfiguration = void 0;
+exports.readConfig = exports.twordleConfiguration = void 0;
 const dotenv = __importStar(require("dotenv"));
 const lodash_1 = require("lodash");
 const readConfig = (pathToConfigFile) => {
@@ -27,11 +27,10 @@ const readConfig = (pathToConfigFile) => {
         const configOutput = dotenv.config({ path: pathToConfigFile });
         const parsedConfig = configOutput.parsed;
         if (!(0, lodash_1.isNil)(parsedConfig)) {
-            exports.tedClientServerBoilerplateConfiguration = {
-                MONGO_URI: parsedConfig.MONGO_URI,
+            exports.twordleConfiguration = {
                 PORT: Number(parsedConfig.PORT),
             };
-            console.log(exports.tedClientServerBoilerplateConfiguration);
+            console.log(exports.twordleConfiguration);
         }
     }
     catch (err) {
