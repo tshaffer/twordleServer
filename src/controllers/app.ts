@@ -15,8 +15,6 @@ export const initializeSpellChecker = () => {
 
   // Parse an hunspell dictionary that can be serialized as JSON
   const DICT = spellchecker.parse({
-    // aff: fs.readFileSync('/Users/tedshaffer/Documents/Projects/twordleServer/node_modules/dictionary-en/index.aff'),
-    // dic: fs.readFileSync('/Users/tedshaffer/Documents/Projects/twordleServer/node_modules/dictionary-en/index.dic')
     aff: fs.readFileSync('./node_modules/dictionary-en/index.aff'),
     dic: fs.readFileSync('./node_modules/dictionary-en/index.dic')
   });
