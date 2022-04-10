@@ -166,7 +166,6 @@ export const getHelperWords = (request: Request, response: Response, next: any) 
 
   for (const candidateWord of candidateWords) {
     const isWord = spellchecker.check(candidateWord);
-    // console.log(candidateWord + ' ' + isWord);
     if (isWord) {
       words.push(candidateWord);
 
@@ -197,6 +196,8 @@ export const getHelperWords = (request: Request, response: Response, next: any) 
 
   response.status(200).json({
     success: true,
-    words,
+    // words,
+    // wordsFoundByNumberOfSpecifiedLetters,
+    helperWord: matchesWithMaxLettersFound[0],
   });
 };
