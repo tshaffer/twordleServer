@@ -5,6 +5,8 @@ import { isNil } from 'lodash';
 
 import { version } from '../version';
 
+import { WordsFoundByNumberOfSpecifiedLetters } from '../types';
+
 let spellchecker: { parse: (arg0: { aff: Buffer; dic: Buffer; }) => any; use: (arg0: any) => void; check: (arg0: string) => any; };
 
 export const initializeSpellChecker = () => {
@@ -90,6 +92,19 @@ export const getWords = (request: Request, response: Response, next: any) => {
   });
 };
 
+export const getNumberOfLettersInWordAtAnyLocationInFoundWord = (lettersInWordAtAnyLocationAsArray: string[], foundWord: string): number => {
+  
+  let lettersInWordAtAnyLocationInWordCount = 0;
+
+  for (const letterInWord of lettersInWordAtAnyLocationAsArray) {
+    if (foundWord.includes(letterInWord)) {
+      lettersInWordAtAnyLocationInWordCount++;
+    }
+  }
+  return lettersInWordAtAnyLocationInWordCount;
+};
+
+
 export const candidateWordIncludesLetterInWordAtAnyLocation = (lettersInWordAtAnyLocationAsArray: string[], candidateWord: string): boolean => {
   for (const letterInWordAtAnyLocation of lettersInWordAtAnyLocationAsArray) {
     if (candidateWord.includes(letterInWordAtAnyLocation)) {
@@ -110,7 +125,6 @@ export const candidateWordIncludesDuplicateLetterInWordAtAnyLocation = (lettersI
   }
   return false;
 };
-
 
 export const getHelperWords = (request: Request, response: Response, next: any) => {
   console.log('getHelperWords');
@@ -148,16 +162,38 @@ export const getHelperWords = (request: Request, response: Response, next: any) 
   }
 
   const words: string[] = [];
+  const wordsFoundByNumberOfSpecifiedLetters: WordsFoundByNumberOfSpecifiedLetters = {};
 
   for (const candidateWord of candidateWords) {
     const isWord = spellchecker.check(candidateWord);
     // console.log(candidateWord + ' ' + isWord);
     if (isWord) {
       words.push(candidateWord);
+
+      const numberOfLettersInWordAtAnyLocationInFoundWord = getNumberOfLettersInWordAtAnyLocationInFoundWord(lettersInWordAtAnyLocationAsArray, candidateWord);
+      const key = numberOfLettersInWordAtAnyLocationInFoundWord.toString();
+      if (isNil(wordsFoundByNumberOfSpecifiedLetters[key])) {
+        wordsFoundByNumberOfSpecifiedLetters[key] = [];        
+      }
+      wordsFoundByNumberOfSpecifiedLetters[key].push(candidateWord);
     }
   }
 
   console.log('words length', words.length);
+  console.log('wordsFoundByNumberOfSpecifiedLetters');
+
+  let maxNumLettersFound = 0;
+  for (const [key, value] of Object.entries(wordsFoundByNumberOfSpecifiedLetters)) {
+    console.log(`${key}: ${value}`);
+    const keyAsNum = parseInt(key, 10);
+    if (keyAsNum > maxNumLettersFound) {
+      maxNumLettersFound = keyAsNum;
+    }
+  }
+
+  console.log('maxNumLettersFound', maxNumLettersFound);
+  const matchesWithMaxLettersFound: string[] = wordsFoundByNumberOfSpecifiedLetters[maxNumLettersFound.toString()];
+  console.log(matchesWithMaxLettersFound);
 
   response.status(200).json({
     success: true,
