@@ -15,6 +15,7 @@ import {
   postTest,
   getVersion,
   getWords,
+  getHelperWords,
 } from './controllers';
 
 class App {
@@ -42,6 +43,7 @@ class App {
     this.app.get('/api/v1/version', getVersion);
     
     this.app.post('/api/v1/getWords', getWords);
+    this.app.post('/api/v1/getHelperWords', getHelperWords);
 
     this.app.get('/api/v1/test', getTest);
     this.app.post('/api/v1/test', postTest);
