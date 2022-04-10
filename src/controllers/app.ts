@@ -132,9 +132,9 @@ export const getHelperWords = (request: Request, response: Response, next: any) 
 
   const candidateWords: string[] = [];
 
-  const { lettersInWordAtAnyLocation, commonLetters } = request.body;
+  const { helperLetters, commonLetters } = request.body;
 
-  const lettersInWordAtAnyLocationAsArray: string[] = lettersInWordAtAnyLocation.split('');
+  const lettersInWordAtAnyLocationAsArray: string[] = helperLetters.split('');
   const candidateLetters: string[] = lettersInWordAtAnyLocationAsArray.concat(commonLetters);
 
   for (let clalIndex0 = 0; clalIndex0 < candidateLetters.length; clalIndex0++) {
